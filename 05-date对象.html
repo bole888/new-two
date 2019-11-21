@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  内置对象里面还有一个比较常用
+    Date对象
+      - 日期
+      - 日期里面包含： 年月日时分秒 周几 毫秒
+
+    补充
+      - 创建指定日期的对象
+        - 给 Date构造函数传参
+
+          - new Date(年,月,日,时,分,秒,毫秒)   // 每个参数都可以省略
+
+          - new Date('yyyy-mm-dd hh:MM:ss')
+
+          - new Date(给一个毫秒数);
+    获取总的毫秒
+      date.getTime() // 获取从1970年1月1日开始到现在的总共的毫秒数，是一个13位的整数
+*/
+
+// var date = new Date();
+// console.log(date);
+
+// 创建2019年1月1日
+// var d = new Date(2019,0,1);
+// console.log(d);
+
+// 创建2019年1月1日
+// var d = new Date('2019-01-01 00:00:03');
+// console.log(d);
+
+// 创建2019年1月1日
+// 这个地方给毫秒数，要用你的指定时间 - 1970年1月1日 得到所经过的毫秒数
+// var d = new Date(0);
+// console.log(d);
+
+// 1970年1月1日 到当前所经过的毫秒数
+// var date = new Date();
+// var t = date.getTime(); // 得到 从现在开始往前算，算到1970年1月1日的所有的毫秒
+// console.log(t);
+
+// var d = new Date(1573282275475);
+// console.log(d);
+</script>
+</html>
