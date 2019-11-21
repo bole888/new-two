@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+/*
+  数组也是对象
+    数组有方法
+*/
+
+/* 数组中操作元素的方法 */
+/* push,pop,shift,unshift */
+/* 排队
+    - 后来者排在后面
+ */
+var arr = ['刘备','曹操','诸葛亮'];
+console.log(arr);
+// 从数组末尾添加元素 ， 返回值是新数组的长度
+arr.push('张飞');
+
+console.log(arr);
+// 从数组的末尾删除元素 , 返回值就是被删除的元素
+var result = arr.pop();
+console.log(result);
+console.log(arr);
+
+// 从数组的最前面插入元素
+arr.unshift('张飞');
+console.log(arr);
+// 从数组的最前面，删除元素
+var res = arr.shift();
+console.log(res);
+console.log(arr);
+
+//从任意位置操作数组的元素
+// 从中间把元素添加到数组里面
+// 数组.splice(从哪里开始添加,0,添加的元素);
+arr.splice(1,0,'张飞');
+console.log(arr);
+// 从数组的中间删除元素
+// 数组.splice(从哪里开始删除,总共删除多少个);
+arr.splice(1,1);
+console.log(arr);
+
+// 从数组中间替换元素
+// 数组.splice(从哪里开始替换,替换多少个,谁来替换)
+arr.splice(1,1,'许褚');
+console.log(arr);
+arr.splice(1,1,'曹操');
+console.log(arr);
+</script>
+</html>
