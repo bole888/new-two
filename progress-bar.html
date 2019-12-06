@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../static/css/bootstrap.css">
+  <title>Document</title>
+  <style>
+    .mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: none;
+    }
+
+    .progress {
+      width: 50%;
+      height: 40px;
+      border: 1px solid #000;
+      border-radius: 4px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .progress-bar {
+      /* background-color: blue; */
+      height: 100%;
+      width: 0%;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="file" id="ff">
+  <div class="mask">
+    <!-- <div class="progress">
+      <div class="progress-bar"></div>
+    </div> -->
+
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+            style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
+    </div>
+  </div>
+</body>
+<script>
+  /*
+    要实现文件的上传，就需要写js代码了
+      1. 注册change事件
+      2. 得到文件，转换为文件流
+      3. 使用ajax上传
+  */
+  let btn = document.querySelector('#ff');
+  let mask = document.querySelector('.mask');
+  let bar = document.querySelector('.progress-bar');
+  btn.onchange = function () {
+    //得到文件
+    let file = this.files[0];
+    // 转换为文件流
+    let fd = new FormData();
+    fd.append('pic', file);
+    // 先把遮罩和进度条显示
+    mask.style.display = 'block';
+    // 搭车
+    var xhr = new XMLHttpRequest();
+    xhr.open('post','http://127.0.0.1:8080/uploadHeadImg');
+    // XMLHTTPRequest 有两个版本，1.0版本是不支持上传的事件的，后来进化到了2.0以后，才支持 —— 这是一个新的特性
+    // 在XMLHTTPRequest2.0里面新增了一个事件： onprogress
+    xhr.upload.onprogress = function(e){
+      // 进度条怎么实现： 通知用户当前上传了百分之多少
+      // 上传进度 = 已经上传的 / 总共要上传的
+      // console.log(e.loaded,e.total);
+      // console.log((e.loaded / e.total).toFixed(4) * 100);
+      let percent = (e.loaded / e.total).toFixed(4) * 100;
+      // 要让进度条显示出来，并且修改内部的宽度来实现进图条
+      bar.style.width = percent + '%';
+      // 给进度条添加文字提示
+      bar.innerHTML = percent + '%';
+    }
+    xhr.send(fd);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // console.log(xhr.responseText);
+        let res = JSON.parse(xhr.responseText);
+        if(res.code === 200){
+          mask.style.display = 'none';
+        }
+      }
+    }
+
+  }
+</script>
+
+</html>
